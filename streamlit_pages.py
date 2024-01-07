@@ -137,7 +137,7 @@ def search_collaborative_street_works(data_manager):
         st.dataframe(df_display, hide_index=True)
         return df_display
     else:
-        st.info("**Please select at least one filter to view the data.**")
+        st.info("**Please select at least one filter to view the data - be patient whilst the map loads!**")
         return None
 
 
