@@ -32,7 +32,7 @@ def main():
     elif page == ":two: Flow Charts":
         st.title('Collaborative Streetwork Flow Charts (Jan 2022 to Dec 2023)')
         st.markdown("### Select multiple highway authorities and analyse the differences between them - a random one"
-                    "has been chosen for you")
+                    " has been chosen for you")
         st.info("**A good tip is to select highway authorities within similar areas (e.g. London Boroughs)**")
         explore_collab_works_sankey_page(data_manager)
 
