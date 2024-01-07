@@ -29,17 +29,17 @@ def create_collab_map(df):
         # Create HTML content for each marker dynamically
         html_content = f"""
             <div style="font-size: 12px; font-family: monospace">
-                <h4>Promoter: {row['promoter_organisation']}</h4>
-                <p>Highway Authority: {row['highway_authority']}<br>
-                   Month: {row['month']}<br>
-                   Year: {row['year']}<br>
-                   Street Name: {row['street_name']}<br>
-                   Activity: {row['activity_type']}<br>
-                   Collaboration Type: {row['collaboration_type']}<br>
-                   Work Category: {row['work_category']}</p>
+                <h4><b>Promoter:</b> {row['promoter_organisation']}</h4>
+                <p><b>Highway Authority:</b> {row['highway_authority']}<br>
+                   <b>Month:</b> {row['month']}<br>
+                   <b>Year:</b> {row['year']}<br>
+                   <b>Street Name:</b> {row['street_name']}<br>
+                   <b>Activity:</b> {row['activity_type']}<br>
+                   <b>Collaboration Type:</b> {row['collaboration_type']}<br>
+                   <b>Work Category:</b> {row['work_category']}</p>
             </div>
         """
-        iframe = branca.element.IFrame(html=html_content, width=200, height=185)
+        iframe = branca.element.IFrame(html=html_content, width=250, height=195)
         popup = folium.Popup(iframe, parse_html=True)
 
         folium.Marker(
