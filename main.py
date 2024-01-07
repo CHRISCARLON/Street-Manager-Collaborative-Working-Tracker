@@ -30,7 +30,7 @@ def main():
             else:
                 st.write("No data available to display on the map.")
     elif page == ":two: Flow Charts":
-        st.title('Collaborative Streetwork Flow Charts')
+        st.title('Collaborative Streetwork Flow Charts (Jan 2022 to Dec 2023)')
         explore_collab_works_sankey_page(data_manager)
 
 
