@@ -1,25 +1,19 @@
 import plotly.graph_objects as go
 
 
-def prepare_completed_sankey_data(df_completed_works, selected_highway_authorities, selected_months,
+def prepare_completed_sankey_data(df_completed_works, selected_highway_authorities, selected_months, selected_years,
                                   selected_activity_types, selected_work_categories,
                                   figure_height=1500, figure_width=1500):
 
     """
-    Create an interactive sankey diagram using the returned completed works records.
-
-    Parameters:
-    DataFrame: Dataframe containing the permit data
-
-    Returns:
-    Plotly figure required to show the sankey.
-    This will be used in the explore completed works sankey page function in main.py
+    Create an interactive sankey diagram using the returned completed collaboration df.
     """
 
     # Apply additional filters
     df_filtered = df_completed_works[
         (df_completed_works['highway_authority'].isin(selected_highway_authorities)) &
         (df_completed_works['month'].isin(selected_months)) &
+        (df_completed_works['year'].isin(selected_years)) &
         (df_completed_works['activity_type'].isin(selected_activity_types)) &
         (df_completed_works['work_category'].isin(selected_work_categories))
     ]

@@ -21,8 +21,12 @@ def create_collab_map(df):
     geodf["latitude"] = geodf.centroid.y
     geodf["longitude"] = geodf.centroid.x
 
-    # Create a Folium map
-    m = folium.Map(location=[54.5, -3.5], zoom_start=6)
+    # Calculate mean location for initial map center
+    mean_latitude = geodf["latitude"].mean()
+    mean_longitude = geodf["longitude"].mean()
+
+    # Create a Folium map centered on the mean location
+    m = folium.Map(location=[mean_latitude, mean_longitude], zoom_start=8)
     marker_cluster = MarkerCluster().add_to(m)
 
     for _, row in geodf.iterrows():
@@ -39,7 +43,7 @@ def create_collab_map(df):
                    <b>Work Category:</b> {row['work_category']}</p>
             </div>
         """
-        iframe = branca.element.IFrame(html=html_content, width=250, height=195)
+        iframe = branca.element.IFrame(html=html_content, width=265, height=195)
         popup = folium.Popup(iframe, parse_html=True)
 
         folium.Marker(

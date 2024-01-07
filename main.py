@@ -28,9 +28,11 @@ def main():
             if map_display:
                 folium_static(map_display, width=1300, height=1000)
             else:
-                st.write("No data available to display on the map.")
+                st.write("No data available to display on the map")
     elif page == ":two: Flow Charts":
         st.title('Collaborative Streetwork Flow Charts (Jan 2022 to Dec 2023)')
+        st.markdown("### Select multiple highway authorities and analyse the differences between them")
+        st.info("**A good tip is to select highway authorities within similar areas (e.g. London Boroughs)**")
         explore_collab_works_sankey_page(data_manager)
 
 

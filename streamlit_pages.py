@@ -8,8 +8,9 @@ from constants import london_highway_authorities, columns_to_keep
 # Home Page
 def home_page():
     st.title(':mag_right: Welcome to the Streetworks Collaboration Tracker')
-    st.warning("""
-    **Contains Street Manager Data which is public sector information licensed under the Open Government Licence v3.0.**
+    st.info("""
+    **This app contains public sector information licensed under the Open Government Licence v3.0
+    (DfT Street Manager Data).**
     \n**Please note that this tracker is for educational purposes only and does not have the 
     endorsement, affiliation, support or approval of the Secretary of State for Transport.**
     \n**If you notice a bug or want to contribute please email me at <StreetManagerExplorer@gmail.com> or via GitHub.**
@@ -147,6 +148,7 @@ def explore_collab_works_sankey_page(data_manager):
     # Get unique values for filters directly from df_completed_works
     unique_highway_authorities = df_completed_works['highway_authority'].unique()
     unique_months = df_completed_works['month'].unique()
+    unique_years = df_completed_works['year'].unique()  # Extracting unique years
     unique_activity_types = df_completed_works['activity_type'].unique()
     unique_work_categories = df_completed_works['work_category'].unique()
 
@@ -154,6 +156,7 @@ def explore_collab_works_sankey_page(data_manager):
     selected_highway_authorities = st.sidebar.multiselect('Select Highway Authorities', unique_highway_authorities,
                                                           default=unique_highway_authorities[0])
     selected_months = st.sidebar.multiselect('Select Months', unique_months, default=unique_months)
+    selected_years = st.sidebar.multiselect('Select Years', unique_years, default=unique_years)  # Year filter
     selected_activity_types = st.sidebar.multiselect('Select Activity Types', unique_activity_types,
                                                      default=unique_activity_types)
     selected_work_categories = st.sidebar.multiselect('Select Work Categories', unique_work_categories,
@@ -163,15 +166,14 @@ def explore_collab_works_sankey_page(data_manager):
     filtered_data = df_completed_works[
         (df_completed_works['highway_authority'].isin(selected_highway_authorities)) &
         (df_completed_works['month'].isin(selected_months)) &
+        (df_completed_works['year'].isin(selected_years)) &  # Filtering by selected years
         (df_completed_works['activity_type'].isin(selected_activity_types)) &
         (df_completed_works['work_category'].isin(selected_work_categories))
         ]
 
     if not filtered_data.empty:
         fig = prepare_completed_sankey_data(filtered_data, selected_highway_authorities, selected_months,
-                                            selected_activity_types, selected_work_categories)
+                                            selected_years, selected_activity_types, selected_work_categories)
         st.plotly_chart(fig)
     else:
         st.info("**Please select filters to view the Sankey diagram!**")
-
-
